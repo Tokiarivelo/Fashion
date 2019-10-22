@@ -8,20 +8,26 @@ import {
     VisibilityFilters,
  } from './action';
 
-export interface AddTodo {
-    text: string;
-    completed : boolean;
+export interface AddTodo { 
+    type: 'ADD_TODO' ;
+    text : string;
 }
-export interface Visibility {
-    text: string;
-    completed : boolean;
+export interface ToggleTodo { 
+    type: 'TOGGLE_TODO';
+    index : number;
 }
+export interface Visibility { 
+    type: 'SET_VISIBILITY_FILTER';
+    filter : string;
+}
+
+export type KnownAction = AddTodo | ToggleTodo | Visibility;
 
 const initialState = {
     visibilityFilter: VisibilityFilters.SHOW_ALL,
     todos: [],
 };
-function todos(state = [], action: Action) {
+function todos(state = [], action: KnownAction) {
     switch (action.type) {
         case ADD_TODO:
             return [
@@ -45,7 +51,7 @@ function todos(state = [], action: Action) {
     }
 }
 
-function todoApp(state = initialState, action: Action) {
+function todoApp(state = initialState, action: KnownAction) {
     switch (action.type) {
         case SET_VISIBILITY_FILTER:
             return Object.assign({}, state, {
