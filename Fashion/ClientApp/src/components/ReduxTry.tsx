@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as React from 'react';
-import { AddTodo } from './AddTodo'
+import  AddTodo  from './AddTodo'
 
 class ReduxTry extends React.Component{
     public render() {
