@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/classnames": "^2.2.9",
     "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
     "connected-react-router": "6.2.1",
     "history": "4.7.2",
     "jquery": "^3.4.1",

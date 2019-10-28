@@ -1,23 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../redux/actions";
+import * as TodoStore from "../redux/actions";
+import { RouteComponentProps } from 'react-router';
 
-type Props = typeof addTodo ;
+
+type TodoProps =
+    TodoStore.Todo &
+    typeof TodoStore.actionCreators &
+    RouteComponentProps<{}>;
 type State = {
-    input : string,
+    input: string,
 }
 
-class AddTodo extends React.Component<Props, State> {
-    readonly state: State = {
-        input : '',
-      };
+class AddTodo extends React.Component<TodoProps, State> {
 
+    readonly state: State = {
+        input: '',
+    };
     updateInput = (input : string) => {
         this.setState({ input });
     };
 
     handleAddTodo = () => {
-        this.props.addTodo(this.state.input);
+        this.props.add(this.state.input);
         this.setState({ input: "" });
     };
 
@@ -38,6 +43,6 @@ class AddTodo extends React.Component<Props, State> {
 
 export default connect(
     null,
-    addTodo 
+    TodoStore.actionCreators 
 )(AddTodo);
 // export default AddTodo;
