@@ -1,6 +1,5 @@
 import { ActionTypes } from './actionTypes'
-import { Action, Reducer } from 'redux';
-import Todo from '../components/Todo';
+import Todo from './Todo';
 
 
 
@@ -24,7 +23,7 @@ export function addTodo (content : string){
   }
 };
 
-export function toggleTodo  (id : number){
+export function toggleTodo (id : number){
   return{
     type: ActionTypes.TOGGLE_TODO,
     payload: { id }
