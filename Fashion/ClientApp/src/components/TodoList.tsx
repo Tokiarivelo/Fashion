@@ -1,16 +1,17 @@
-import React from "react";
-import {State} from '../redux/reducers/todos'
-import { connect } from "react-redux";
-import {Todo} from './Todo'
+import * as React from 'react';
 
-const TodoList = (state : State) => (
-    <ul className="todo-list">
-        {
-            state.todos && state.todos.length ?
-            state.todos.map((todo, index) =>{
-                return <Todo key={`todo-${todo.id}`} todo={todo}/>
-            }) :
-            "No todo yet!"
-        }
-    </ul>
-)
+export default class TodoList extends React.Component{
+    render(){
+        return(
+            <React.Fragment>
+                <ul>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                </ul>
+            </React.Fragment>
+        )
+    }
+}

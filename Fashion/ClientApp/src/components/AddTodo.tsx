@@ -1,48 +1,44 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as TodoStore from "../redux/actions";
-import { RouteComponentProps } from 'react-router';
+import * as React from 'react';
+import TodoList from './TodoList';
 
-
-type TodoProps =
-    TodoStore.Todo &
-    typeof TodoStore.actionCreators &
-    RouteComponentProps<{}>;
-type State = {
-    input: string,
+interface todo{
+    id : number,
+    content : string,
+    completed : boolean
+}
+interface todos{
+    input : string,
+    todos: todo[]
 }
 
-class AddTodo extends React.Component<TodoProps, State> {
-
-    readonly state: State = {
-        input: '',
+export default class AddTodo extends React.Component {
+    state: todos = {
+        input : '',
+        todos : []
     };
-    updateInput = (input : string) => {
-        this.setState({ input });
-    };
+    
+    _handleAddTodo(value : string){
+        this.state.todos.push({ id:1, content : value, completed : false});
+    }
 
-    handleAddTodo = () => {
-        this.props.add(this.state.input);
-        this.setState({ input: "" });
-    };
+    _updateinput(value : string){
+        this.setState({ input: value});
+    }
+    updateinput = (event: React.ChangeEvent<HTMLInputElement>) =>{
+        this._updateinput(event.target.value);
+    }
 
-    render() {
-        return (
-            <div>
-                <input
-                    onChange={e => this.updateInput(e.target.value)}
-                    value={this.state.input}
-                />
-                <button className="add-todo" onClick={this.handleAddTodo}>
-                    Add Todo
-                </button>
-            </div>
-        );
+    handleAddTodo = (event: React.MouseEvent<HTMLButtonElement>) =>{
+        event.preventDefault();
+        this._handleAddTodo(this.state.input);
+    }
+    render(){
+        return(
+            <React.Fragment>
+                <input type="text" onChange={this.updateinput}/>
+                <button onClick={this.handleAddTodo}>Add Todo</button>
+                <TodoList todos={this.state.todos}/>
+            </React.Fragment>
+        )
     }
 }
-
-export default connect(
-    null,
-    TodoStore.actionCreators 
-)(AddTodo);
-// export default AddTodo;
